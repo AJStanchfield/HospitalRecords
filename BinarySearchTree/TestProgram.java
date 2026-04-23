@@ -14,27 +14,34 @@ public class TestProgram {
             switch (choice) {
                 case "1":
                     addPatient(tree);
+                    if (!askToContinue()) running = false;
                     break;
                 case "2":
                     searchByName(tree);
+                    if (!askToContinue()) running = false;
                     break;
                 case "3":
                     searchByRoom(tree);
+                    if (!askToContinue()) running = false;
                     break;
                 case "4":
                     updatePatient(tree);
+                    if (!askToContinue()) running = false;
                     break;
                 case "5":
                     deletePatient(tree);
+                    if (!askToContinue()) running = false;
                     break;
                 case "6":
                     System.out.println("\n-- Inorder listing --");
                     tree.inorderTraversal();
+                    if (!askToContinue()) running = false;
                     break;
                 case "7":
                     System.out.println("Tree Height: " + tree.treeHeight());
                     System.out.println("Number of Nodes: " + tree.treeNodeCount());
                     System.out.println("Number of Leaves: " + tree.treeLeavesCount());
+                    if (!askToContinue()) running = false;
                     break;
                 case "0":
                     running = false;
@@ -128,6 +135,20 @@ public class TestProgram {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
             return def;
+        }
+    }
+
+    private static boolean askToContinue() {
+        while (true) {
+            System.out.print("Would you like to make another selection? (y/n): ");
+            String response = sc.nextLine().trim().toLowerCase();
+            if (response.equals("y")) {
+                return true;
+            } else if (response.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Invalid input. Please enter 'y' or 'n'.");
+            }
         }
     }
 }
